@@ -1,0 +1,17 @@
+# Segredos — NUNCA versionar
+.env
+
+# config.js e versionado de proposito (deploy sem build step).
+# Se um dia quiser gerar no CI, remova esta excecao e passe a usar
+# variaveis de ambiente do Netlify.
+!js/config.js
+
+# Dependencias e cache
+node_modules/
+.netlify/
+
+# Sistema operacional / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

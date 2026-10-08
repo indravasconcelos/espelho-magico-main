@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espelho Mágico Beauty</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <div class="logo">
+      ESPELHO MÁGICO
+      <span class="logo-sub">Beauty</span>
+    </div>
+    <nav class="header-nav" id="headerNav">
+      <a href="#home" onclick="showHome()">Início</a>
+      <a href="#" onclick="showHome();setTimeout(()=>document.querySelector('.brand-story')?.scrollIntoView({behavior:'smooth'}),100)">História</a>
+      <a href="#" onclick="showHome();setTimeout(()=>document.querySelector('.featured-collection')?.scrollIntoView({behavior:'smooth'}),100)">Destaques</a>
+      <a href="#catalog" onclick="showCatalog()" class="menu-admin-only">Coleção</a>
+      <a href="#" onclick="showHome();setTimeout(()=>document.querySelector('.experience')?.scrollIntoView({behavior:'smooth'}),100)">Sobre</a>
+      <a href="#" class="cart-link menu-admin-only" onclick="openCart()" title="Carrinho">
+        🛒<span class="cart-count" id="cartCount">0</span>
+      </a>
+    </nav>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ====== MOBILE NAV ====== -->
+<div class="mobile-nav-overlay" id="mobileOverlay" onclick="closeMobileNav()"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  <a href="#home" onclick="showHome();closeMobileNav()">Início</a>
+  <a href="#" onclick="showHome();closeMobileNav();setTimeout(()=>document.querySelector('.brand-story')?.scrollIntoView({behavior:'smooth'}),150)">História</a>
+  <a href="#" onclick="showHome();closeMobileNav();setTimeout(()=>document.querySelector('.featured-collection')?.scrollIntoView({behavior:'smooth'}),150)">Destaques</a>
+  <a href="#catalog" onclick="showCatalog();closeMobileNav()" class="menu-admin-only">Coleção</a>
+  <a href="#" onclick="showHome();closeMobileNav();setTimeout(()=>document.querySelector('.experience')?.scrollIntoView({behavior:'smooth'}),150)">Sobre</a>
+  <a href="#" onclick="openCart();closeMobileNav()" class="menu-admin-only">Carrinho (<span id="mobileCartCount">0</span>)</a>
+</nav>
+
+<!-- ================================================================
+     PAGE 1 — HOME
+     ================================================================ -->
+<div id="page-home">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Sua beleza<br>
+        merece um <em>toque mágico.</em>
+      </h1>
+      <p class="hero-p">
+        Batons, tiaras e acessórios selecionados com todo carinho para realçar 
+        sua elegância natural. Descubra uma nova forma de brilhar.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="showCatalog()">Ver Catálogo</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="https://i.pinimg.com/736x/06/01/cc/0601cc35f51841b5842c5079ce50ee67.jpg" alt="Maquiagens e acessórios" loading="eager">
+      <div class="hero-badge">
+        <div class="hero-badge-num">6</div>
+        <div class="hero-badge-label">Produtos em Destaque</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section class="brand-story">
+  <div class="container story-grid">
+    <div class="story-visual">
+      <img class="story-img" src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=600&h=600&q=80" alt="Maquiagem elegante" loading="lazy">
+      <div class="story-img-frame"></div>
+    </div>
+    <div class="story-text">
+      <span class="story-tag">Nossa História</span>
+      <h2 class="story-title">A beleza está nos <span style="color:var(--gold)">detalhes</span></h2>
+      <p class="story-p">
+        No Espelho Mágico, acreditamos que cada mulher merece sentir-se única e confiante. 
+        Por isso, selecionamos pessoalmente cada batom, cada tiara e cada acessório — 
+        peças que contam histórias e transformam olhares.
+      </p>
+      <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.8;margin-bottom:32px">
+        De cores vibrantes a tons sutis, do clássico ao contemporâneo, 
+        nossa coleção foi pensada para celebrar a diversidade da beleza feminina.
+      </p>
+      <button class="btn btn-primary" onclick="showCatalog()">Conheça Nossos Produtos</button>
+      <div class="story-signature" style="margin-top:24px">— Espelho Mágico Beauty</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED COLLECTION -->
+<section class="featured-collection">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Destaques</span>
+      <h2 class="section-title">Os Mais <span style="color:var(--gold)">Pedidos</span></h2>
+      <p class="section-p">Clique para ver detalhes e adicionar ao carrinho</p>
+    </div>
+    <div class="collection-grid" id="featuredGrid"></div>
+    <div style="text-align:center;margin-top:40px">
+      <button class="btn btn-outline" onclick="showCatalog()">Ver Coleção Completa</button>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" style="color:var(--text)">Por que escolher a <span style="color:var(--gold)">Espelho Mágico</span>?</h2>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-icon">✨</div>
+        <h3>Seleção Curada</h3>
+        <p>Cada peça é escolhida manualmente para garantir qualidade, estilo e elegância em cada detalhe.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">💬</div>
+        <h3>Compra pelo WhatsApp</h3>
+        <p>Monte seu pedido no catálogo e finalize com um clique. Atendimento personalizado e rápido.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">📦</div>
+        <h3>Embalagem Especial</h3>
+        <p>Seu pedido chega em uma embalagem preparada com todo carinho, pronta para presentear ou se presentear.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+</div><!-- /page-home -->
+
+<!-- ================================================================
+     PAGE 2 — CATALOG
+     ================================================================ -->
+<div class="page-catalog" id="page-catalog">
+
+  <div class="catalog-admin-back" onclick="location.hash='#admin'" style="display:none">
+    ← Voltar ao Admin
+  </div>
+
+  <div class="catalog-hero">
+    <span class="section-tag" style="color:var(--gold)">Catálogo</span>
+    <h1 class="section-title" style="color:var(--text)">Nossa <span style="color:var(--gold)">Coleção</span></h1>
+    <p>Clique em qualquer produto para ver detalhes, fotos e adicionar ao carrinho</p>
+  </div>
+
+  <div class="container">
+    <div class="catalog-filters" id="catalogFilters"></div>
+    <div class="catalog-grid" id="catalogGrid"></div>
+  </div>
+
+</div><!-- /page-catalog -->
+
+<!-- ================================================================
+     PRODUCT MODAL (carrossel + detalhes)
+     ================================================================ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal" id="productModal">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-visual">
+    <div class="modal-carousel" id="modalCarousel"></div>
+    <button class="modal-carousel-btn prev" onclick="modalPrev()">‹</button>
+    <button class="modal-carousel-btn next" onclick="modalNext()">›</button>
+    <div class="modal-thumbs" id="modalThumbs"></div>
+  </div>
+  <div class="modal-info" id="modalInfo">
+    <div class="modal-cat" id="modalCat"></div>
+    <h2 class="modal-nome" id="modalNome"></h2>
+    <div class="modal-preco" id="modalPreco"></div>
+    <p class="modal-desc" id="modalDesc"></p>
+    <button class="modal-btn" id="modalBtn">Adicionar ao Carrinho</button>
+  </div>
+</div>
+
+<!-- ================================================================
+     CART DRAWER
+     ================================================================ -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h2>🛒 Seu Pedido</h2>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Seu carrinho está vazio</div>
+  </div>
+  <div class="cart-footer" id="cartFooter">
+    <div class="cart-actions">
+      <button class="cart-limpabtn" onclick="limparCarrinho()">Limpar Carrinho</button>
+    </div>
+    <div class="cart-entrega">
+      <label class="cart-entrega-opt">
+        <input type="radio" name="tipoEntrega" value="entrega" checked onchange="atualizarCarrinho()">
+        <span>🚚 Entrega (R$ 8,00)</span>
+      </label>
+      <label class="cart-entrega-opt">
+        <input type="radio" name="tipoEntrega" value="retirada" onchange="atualizarCarrinho()">
+        <span>📍 Retirar no local</span>
+      </label>
+      <textarea id="cartEndereco" class="cart-endereco" placeholder="Informe seu endereço completo" rows="3"></textarea>
+    </div>
+    <div class="cart-total">
+      <span>Subtotal</span>
+      <span id="cartSubtotal">R$ 0,00</span>
+    </div>
+    <div class="cart-total cart-total-frete" id="cartFrete">
+      <span>Entrega</span>
+      <span>R$ 8,00</span>
+    </div>
+    <div class="cart-total cart-total-total">
+      <span>Total</span>
+      <span id="cartTotal">R$ 0,00</span>
+    </div>
+    <button class="cart-whatsapp" onclick="finalizarPedido()">💬 Finalizar Pedido</button>
+  </div>
+</div>
+
+<!-- ================================================================
+     ADMIN (hidden — acessível apenas via URL)
+     ================================================================ -->
+<div class="admin-section" id="page-admin">
+  <div class="container">
+    <div class="admin-login" id="adminLogin">
+      <h2>Acesso <span style="color:var(--gold)">Restrito</span></h2>
+      <input type="password" id="adminPass" placeholder="Senha" onkeydown="if(event.key==='Enter')loginAdmin()" autocomplete="off">
+      <button class="btn btn-primary" id="adminLoginBtn" onclick="loginAdmin()">Entrar</button>
+      <p class="admin-error" id="adminError">Senha incorreta</p>
+    </div>
+    <div class="admin-panel" id="adminPanel">
+      <div class="admin-header">
+        <h2>Gerenciar <span style="color:var(--gold)">Produtos</span></h2>
+        <button class="btn btn-outline" onclick="logoutAdmin()" style="padding:8px 24px">Sair</button>
+      </div>
+      <div class="admin-grid" id="adminGrid"></div>
+      <div style="text-align:center;margin-top:24px">
+        <button class="btn btn-primary" onclick="salvarAdmin()">Salvar Alterações</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="container">
+    <div class="footer-map">
+        <a href="https://maps.google.com/?q=Rua+Areias+5496+Setor+9+de+Baixo+Ariquemes+RO" target="_blank" rel="noopener">
+          <div class="footer-map-frame">
+            <iframe src="https://maps.google.com/maps?q=Rua+Areias+5496+Setor+9+de+Baixo+Ariquemes+RO&output=embed" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </a>
+        <span class="footer-addr">Rua Areias, 5496 — Setor 9 de Baixo, Ariquemes/RO</span>
+      </div>
+      <div class="footer-info">
+        <div class="footer-info-item">
+          <span class="footer-icon">🕐</span>
+          <span>Seg–Sáb: 8h–18h | Dom: Fechado</span>
+        </div>
+        <div class="footer-info-item">
+          <span class="footer-icon">📸</span>
+          <a href="https://instagram.com" target="_blank" rel="noopener">@espelhomagicbeauty</a>
+        </div>
+      </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Espelho Mágico Beauty — Todos os direitos reservados</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== FLOATING WHATSAPP ====== -->
+<a class="whatsapp-float" href="https://wa.me/5569992450529?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20da%20Espelho%20M%C3%A1gico%20Beauty." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="js/produtos.js"></script>
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

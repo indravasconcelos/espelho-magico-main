@@ -1,0 +1,24 @@
+# Espelho Magico Beauty — deploy estatico
+#
+# Sem build step de proposito: o projeto ja e 100% estatico e nao tem
+# framework nem bundler. Publicar a pasta direto elimina qualquer risco
+# de build falhar no deploy e dispensa depender de PowerShell no CI
+# (build-config.ps1 so roda local, com -ExecutionPolicy Bypass).
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# config.js contem configuracao nao sensivel; nunca deve ficar em cache
+# longo, senao trocar WHATSAPP/FRETE no deploy nao surte efeito.
+[[headers]]
+  for = "/js/config.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
